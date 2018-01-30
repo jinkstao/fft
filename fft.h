@@ -1,5 +1,5 @@
-#ifndef _FAST_FOURIER_TRANSFORM_H_
-#define _FAST_FOURIER_TRANSFORM_H_
+#ifndef _FFT_H_
+#define _FFT_H_
 
 #ifdef win32
 #ifdef DLL_EXPORT
@@ -54,4 +54,4 @@ API_DECLSPEC void fft_d2fft_complex(const void *fft_id,
 }
 #endif
 
-#endif  // _FAST_FOURIER_TRANSFORM_H_
+#endif  // _FFT_H_

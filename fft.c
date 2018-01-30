@@ -10,17 +10,6 @@
 
 /************************************************************************************************/
 
-/****************************************GLOBAL VARIABLES****************************************/
-
-// static int fft_sampling_point_count;            // count of sampling points(2^n)
-// static int fft_sampling_point_level;            // log2(fft_sampling_point_count)
-// static fft_complex *fft_polar_sequence;         // this array store temp values of polar
-// static fft_complex *fft_tmp_sequence;           // this array store temp complex values of input
-// static fft_complex *fft_tmp_output_sequence;    // this array store temp complex values of output
-
-/************************************************************************************************/
-
-
 /**************************************Function Declaration**************************************/
 
 static void _fft_complex_plus(const fft_complex *complex1,
@@ -81,7 +70,6 @@ int fft_init(int sampling_point_count, void **fft_id_ptr)
 	float fValue;
     *fft_id_ptr = (fft_info*)malloc(sizeof(fft_info));
     fft_info *info = (fft_info*)(*fft_id_ptr);
-    // fft_sampling_point_count = sampling_point_count;
     info->sampling_point_count = sampling_point_count;
     int tmp = 1;
     info->sampling_point_level = 0;
@@ -97,9 +85,6 @@ int fft_init(int sampling_point_count, void **fft_id_ptr)
         return 0;
     }
     // Initialize polar sequence and temp sequence
-    // fft_polar_sequence = (fft_complex*)malloc(fft_sampling_point_count / 2 * sizeof(fft_complex));
-    // fft_tmp_sequence = (fft_complex*)malloc(fft_sampling_point_count * sizeof(fft_complex));
-    // fft_tmp_output_sequence = (fft_complex*)malloc(fft_sampling_point_count * sizeof(fft_complex));
     info->polar_sequence = (fft_complex*)malloc(info->sampling_point_count / 2 * sizeof(fft_complex));
     info->tmp_sequence = (fft_complex*)malloc(info->sampling_point_count * sizeof(fft_complex));
     info->tmp_output_sequence = (fft_complex*)malloc(info->sampling_point_count * sizeof(fft_complex));
@@ -107,8 +92,6 @@ int fft_init(int sampling_point_count, void **fft_id_ptr)
     for (i = 0; i < info->sampling_point_count / 2; i++)
     {
         angle = -2 * PI / info->sampling_point_count * i;
-        // (fft_polar_sequence + i)->real = cos(angle);
-        // (fft_polar_sequence + i)->imag = sin(angle);
         (info->polar_sequence + i)->real = cos(angle);
         (info->polar_sequence + i)->imag = sin(angle);
     }
