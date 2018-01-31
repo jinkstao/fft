@@ -1,7 +1,7 @@
 #ifndef _FFT_H_
 #define _FFT_H_
 
-#ifdef win32
+#ifdef WIN32
 #ifdef DLL_EXPORT
 #define API_DECLSPEC  __declspec(dllexport)
 #else
