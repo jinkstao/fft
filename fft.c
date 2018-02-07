@@ -6,7 +6,8 @@
 
 /******************************************MACRO DEFINE******************************************/
 
-#define	    PI      3.14159265	    // PI	    
+#define	    PI                  3.14159265	    // PI
+#define     MAGIC_NUMBER        0x5f375a86      // amazing!
 
 /************************************************************************************************/
 
@@ -60,7 +61,20 @@ static inline void _fft_complex_multiple(const fft_complex *complex1,
 
 static inline float _fft_complex_module(const fft_complex *complex)
 {
-    return sqrt(complex->real * complex->real + complex->imag * complex->imag);
+    long i;
+    float x, y;
+    const float f = 1.5f;
+    float tmp = complex->real * complex->real + complex->imag * complex->imag;
+    x = tmp * 0.5f;
+    y  = tmp;
+    i  = *(long *)&y;
+    i  = MAGIC_NUMBER - ( i >> 1 );
+    y  = *(float*)&i;
+    y  = y * ( f - ( x * y * y ) );
+    y  = y * ( f - ( x * y * y ) );
+    return tmp * y;
+
+    // return sqrt(complex->real * complex->real + complex->imag * complex->imag);
 }
 
 int fft_init(int sampling_point_count, void **fft_id_ptr)
